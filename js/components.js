@@ -199,14 +199,14 @@ function ProjectsComponent() {
         {
             title: 'Athlete Management System',
             description: 'Led a 5-person team to build and deploy a comprehensive Athlete Management System for Colby Athletics using Heroku. Created a one-stop portal for real-time athlete readiness tracking using Flask and fetched data from wearables using REST API. Developed an injury prediction model for 775 varsity athletes using historical data, enhancing strategy and team performance.',
-            image: 'assets/images/projects/figrex.jpg',
+            image: 'assets/images/projects/athletemanagement.jpg',
             tags: ['Flask', 'REST API', 'Machine Learning', 'Heroku', 'Team Project'],
             githubUrl: 'https://github.com/enjoythecode/scrum-wizards-cs321'
         },
         {
             title: 'Chaos Dungeon Game',
             description: 'Built a fully functional single-player interactive adventure pc game using Pygame. Pioneered essential character class foundations and crafted an intuitive UI for a seamless gaming experience. Enhanced player engagement and strategy through careful balance of fitness and difficulty.',
-            image: 'assets/images/projects/pantryai.jpg',
+            image: 'assets/images/projects/chaosdungeon.jpg',
             tags: ['Python', 'Pygame', 'Game Development', 'UI Design'],
             githubUrl: 'https://github.com/tylionshield/ChaosDungeon'
         },
