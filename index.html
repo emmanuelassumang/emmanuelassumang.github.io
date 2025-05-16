@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Base CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 3D Styles -->
+    <link rel="stylesheet" href="css/3dstyles.css">
+
+    <style>
+        /* Modern theme with vibrant gradients */
+        :root {
+            --bg-dark: #0a0f1e;
+            --bg-dark-lighter: #141e33;
+            --text-light: #f8fafc;
+            --accent-indigo: #6366f1;
+            --accent-purple: #8b5cf6;
+            --accent-blue: #3b82f6;
+            --accent-pink: #ec4899;
+            --glass-bg: rgba(15, 23, 42, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.15), transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(139, 92, 246, 0.15), transparent 40%),
+                radial-gradient(circle at 90% 20%, rgba(59, 130, 246, 0.1), transparent 30%),
+                radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.1), transparent 30%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Glass morphism elements */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2), 0 0 15px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Updated navbar for dark theme */
+        #navbar {
+            background-color: rgba(10, 15, 30, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link {
+            color: #cbd5e1;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+            margin: 0 1rem;
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, var(--accent-indigo), var(--accent-purple));
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Modern gradient button styles */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+            border: none;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before {
+            left: 0;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-light);
+            border: 1px solid var(--accent-indigo);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(99, 102, 241, 0.1);
+            border-color: var(--accent-purple);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Modern section titles */
+        .section-title {
+            color: var(--text-light);
+            position: relative;
+            padding-bottom: 1rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-indigo), var(--accent-purple));
+            border-radius: 2px;
+        }
+
+        /* Timeline enhancements */
+        .timeline::after {
+            background: linear-gradient(to bottom, var(--accent-blue), var(--accent-purple));
+        }
+
+        .timeline-dot {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+        }
+
+        /* Tech badge enhancements */
+        .tech-badge {
+            background: rgba(30, 41, 59, 0.8);
+            color: var(--text-light);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Animated background */
+        .hero-3d-bg {
+            opacity: 0.7;
+            animation: pulse-bg 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-bg {
+            0% {
+                opacity: 0.5;
+                filter: blur(80px);
+            }
+            100% {
+                opacity: 0.7;
+                filter: blur(100px);
+            }
+        }
+
+        /* Scrollbar style */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--accent-indigo), var(--accent-purple));
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, var(--accent-purple), var(--accent-blue));
+        }
+
+        /* Adjust section colors */
+        section {
+            position: relative;
+            z-index: 1;
+        }
+
+        section:nth-child(even) {
+            background-color: rgba(15, 23, 42, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-[Poppins]">
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 shadow-lg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 font-bold text-2xl">
+                    <a href="#hero" class="bg-gradient-to-r from-accent-indigo to-accent-purple bg-clip-text text-transparent">Emmanuel</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-4">
+                        <a href="#about" class="nav-link">About</a>
+                        <a href="#education" class="nav-link">Education</a>
+                        <a href="#tech-stack" class="nav-link">Skills</a>
+                        <a href="#experience" class="nav-link">Experience</a>
+                        <a href="#projects" class="nav-link">Projects</a>
+                        <a href="#leadership" class="nav-link">Leadership</a>
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-white hover:text-accent-indigo focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900/95 backdrop-blur-sm shadow-lg border-t border-white/5">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="block py-2 px-4 text-white hover:bg-accent-indigo/20 rounded-lg transition-colors">About</a>
+                <a href="#education" class="block py-2 px-4 text-white hover:bg-accent-indigo/20 rounded-lg transition-colors">Education</a>
+                <a href="#tech-stack" class="block py-2 px-4 text-white hover:bg-accent-indigo/20 rounded-lg transition-colors">Skills</a>
+                <a href="#experience" class="block py-2 px-4 text-white hover:bg-accent-indigo/20 rounded-lg transition-colors">Experience</a>
+                <a href="#projects" class="block py-2 px-4 text-white hover:bg-accent-indigo/20 rounded-lg transition-colors">Projects</a>
+                <a href="#leadership" class="block py-2 px-4 text-white hover:bg-accent-indigo/20 rounded-lg transition-colors">Leadership</a>
+                <a href="#contact" class="block py-2 px-4 text-white hover:bg-accent-indigo/20 rounded-lg transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="bg-gradient-to-br from-gray-900 to-black w-full h-full"></div>
+            <!-- 3D animated background -->
+            <div class="hero-3d-bg absolute inset-0"></div>
+            <!-- Animated background elements -->
+            <div id="animated-bg" class="absolute inset-0"></div>
+        </div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
+                        Hi, I'm <span class="bg-gradient-to-r from-accent-indigo to-accent-purple bg-clip-text text-transparent"> Emmanuel</span>
+                    </h1>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl text-gray-300 mb-6">
+                        Software Engineer
+                    </h2>
+                    <p class="text-lg text-gray-400 mb-8 max-w-lg">
+                        Passionate about creating innovative solutions and transforming ideas into reality through code and creativity.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#contact" class="btn-primary px-8 py-3 rounded-full text-white font-medium">
+                            Get In Touch
+                        </a>
+                        <a href="#projects" class="btn-secondary px-8 py-3 rounded-full font-medium">
+                            View My Projects
+                        </a>
+                    </div>
+                    <div class="mt-10 flex space-x-6">
+                        <a href="https://github.com/emmanuelassumang" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-github text-2xl"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/emmanuelassumang" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-linkedin text-2xl"></i>
+                        </a>
+                        <a href="mailto:emmanuelassumang@gmail.com" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fas fa-envelope text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative w-64 h-64 sm:w-80 sm:h-80 overflow-hidden border-4 border-white/10 shadow-2xl rounded-full">
+                        <div class="absolute inset-0 bg-gradient-to-br from-accent-indigo/20 to-accent-purple/20 z-0"></div>
+                        <img src="assets/images/profile.jpg" alt="Profile" class="w-full h-full object-cover relative z-10" />
+                        <div class="absolute inset-0 rounded-full shadow-inner"></div>
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-accent-indigo to-accent-purple rounded-full blur opacity-30"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title">About Me</h2>
+            <div class="glass-card p-6 md:p-10">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0">
+                        <div class="relative overflow-hidden rounded-xl">
+                            <div class="absolute inset-0 bg-gradient-to-br from-accent-indigo/20 to-accent-purple/20 z-0"></div>
+                            <img src="assets/images/profile.jpg" alt="About" class="w-full h-auto object-cover relative z-10 shadow-xl rounded-xl transform transition-transform duration-700 hover:scale-105" />
+                            <div class="absolute -inset-1 bg-gradient-to-r from-accent-indigo to-accent-purple rounded-xl blur opacity-20"></div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 md:pl-10">
+                        <p class="text-lg text-gray-300 mb-6">
+                            I'm a Computer Science student at Colby College with a passion for software engineering, AI, and full-stack development. My experience includes internships at Microsoft where I worked on AI frameworks and platforms.
+                        </p>
+                        <p class="text-lg text-gray-300 mb-6">
+                            I'm constantly exploring new technologies and applying my skills to solve real-world problems. My goal is to create impactful software solutions that make a difference.
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="tech-badge px-4 py-2 rounded-full">Full-Stack</span>
+                            <span class="tech-badge px-4 py-2 rounded-full">AI/ML</span>
+                            <span class="tech-badge px-4 py-2 rounded-full">Software Engineering</span>
+                            <span class="tech-badge px-4 py-2 rounded-full">Mobile Dev</span>
+                        </div>
+                        <div class="mt-8">
+                            <a href="assets/resume/resume.pdf" target="_blank" class="btn-primary px-6 py-2 rounded-full text-white font-medium inline-flex items-center">
+                                <i class="fas fa-download mr-2"></i> Download Resume
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title">Education</h2>
+            <div class="glass-card p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 -mt-10 -mr-10 bg-gradient-to-br from-accent-indigo/20 to-accent-purple/20 rounded-full blur-xl"></div>
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 relative z-10">
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-semibold text-white">Colby College</h3>
+                        <p class="text-gray-400">Waterville, ME, USA</p>
+                    </div>
+                    <div class="mt-2 md:mt-0">
+                        <span class="bg-gradient-to-r from-accent-indigo/30 to-accent-purple/30 text-white py-1 px-4 rounded-full text-sm font-medium border border-white/10">May 2025</span>
+                    </div>
+                </div>
+                <div class="relative z-10">
+                    <p class="text-gray-300 mb-2"><span class="font-semibold text-white">Major:</span> B.A. in Computer Science</p>
+                    <p class="text-gray-300 mb-4"><span class="font-semibold text-white">Honors:</span> Presidential Scholar</p>
+                    <p class="text-gray-300 mb-2"><span class="font-semibold text-white">Relevant Coursework:</span></p>
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        <span class="tech-badge px-3 py-1 rounded-full text-sm">Object-Oriented Programming</span>
+                        <span class="tech-badge px-3 py-1 rounded-full text-sm">Data Structures</span>
+                        <span class="tech-badge px-3 py-1 rounded-full text-sm">Software Engineering</span>
+                        <span class="tech-badge px-3 py-1 rounded-full text-sm">Advanced Databases</span>
+                        <span class="tech-badge px-3 py-1 rounded-full text-sm">Game Design</span>
+                        <span class="tech-badge px-3 py-1 rounded-full text-sm">Programming Languages</span>
+                        <span class="tech-badge px-3 py-1 rounded-full text-sm">Computer Architecture</span>
+                        <span class="tech-badge px-3 py-1 rounded-full text-sm">Computational Modeling</span>
+                        <span class="tech-badge px-3 py-1 rounded-full text-sm">Data Visualization</span>
+                        <span class="tech-badge px-3 py-1 rounded-full text-sm">Linear Algebra</span>
+                        <span class="tech-badge px-3 py-1 rounded-full text-sm">Algorithms</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Tech Stack Section -->
+    <section id="tech-stack" class="py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title">Tech Skills</h2>
+            <div id="tech-stack-component"></div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                <!-- Experience 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="glass-card p-6 md:p-8 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-32 h-32 -mt-10 -ml-10 bg-gradient-to-br from-accent-indigo/20 to-accent-purple/20 rounded-full blur-xl"></div>
+                            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 relative z-10">
+                                <div>
+                                    <h3 class="text-xl md:text-2xl font-semibold text-white">Microsoft Corporation</h3>
+                                    <p class="text-lg text-gray-300">Software Engineer Intern | AI Frameworks Team</p>
+                                </div>
+                                <div class="mt-2 md:mt-0">
+                                    <span class="bg-gradient-to-r from-accent-indigo/30 to-accent-purple/30 text-white py-1 px-4 rounded-full text-sm font-medium border border-white/10">May 2024 - Aug 2024</span>
+                                </div>
+                            </div>
+                            <ul class="list-disc pl-5 text-gray-300 space-y-2 relative z-10">
+                                <li>Optimized LLaMA-2/3 models via function rewrites for complex layers, reducing inference time by 70-95% through ONNX integration and enhanced deployment efficiency.</li>
+                                <li>Engineered advanced ONNX IR transformations for graph initializers, decreasing model memory footprint by 25% while maintaining accuracy during production.</li>
+                                <li>Implemented critical weight operations including MatMul transposing and layer normalization fusion, improving runtime performance by 40% for enterprise-scale AI applications.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="glass-card p-6 md:p-8 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-32 h-32 -mt-10 -mr-10 bg-gradient-to-br from-accent-indigo/20 to-accent-purple/20 rounded-full blur-xl"></div>
+                            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 relative z-10">
+                                <div>
+                                    <h3 class="text-xl md:text-2xl font-semibold text-white">Microsoft Corporation</h3>
+                                    <p class="text-lg text-gray-300">Software Engineer Intern | AI Frameworks Team</p>
+                                </div>
+                                <div class="mt-2 md:mt-0">
+                                    <span class="bg-gradient-to-r from-accent-indigo/30 to-accent-purple/30 text-white py-1 px-4 rounded-full text-sm font-medium border border-white/10">May 2023 - Aug 2023</span>
+                                </div>
+                            </div>
+                            <ul class="list-disc pl-5 text-gray-300 space-y-2 relative z-10">
+                                <li>Developed PyTorch/Azure DevOps monitoring tool detecting regressions 40% faster, improving optimization cycles by 25%.</li>
+                                <li>Benchmarked 8 BERT models for latency/accuracy, reducing inference time by 35% while maintaining 98% accuracy.</li>
+                                <li>Integrated NSGA-II, QMC, and GRID search algorithms, accelerating hyperparameter optimization by 15% and saving $1-3K monthly.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="glass-card p-6 md:p-8 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-32 h-32 -mt-10 -ml-10 bg-gradient-to-br from-accent-indigo/20 to-accent-purple/20 rounded-full blur-xl"></div>
+                            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 relative z-10">
+                                <div>
+                                    <h3 class="text-xl md:text-2xl font-semibold text-white">Microsoft Corporation</h3>
+                                    <p class="text-lg text-gray-300">Explorer Intern | AI Platform</p>
+                                </div>
+                                <div class="mt-2 md:mt-0">
+                                    <span class="bg-gradient-to-r from-accent-indigo/30 to-accent-purple/30 text-white py-1 px-4 rounded-full text-sm font-medium border border-white/10">May 2022 - Aug 2022</span>
+                                </div>
+                            </div>
+                            <ul class="list-disc pl-5 text-gray-300 space-y-2 relative z-10">
+                                <li>Led PM/SWE roles in 3-person team, creating LLM workspace navigation tool that increased accessibility by 40% for 500+ users.</li>
+                                <li>Built VS Code extension translating natural language to 30+ commands with 95% accuracy, boosting workflow efficiency by 65%.</li>
+                                <li>Developed ML model training automation that reduced training time by 70% and increased throughput 3x while maintaining 99.2% accuracy.</li>
+                                <li>Expanded system functionality to map 300+ commands.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section (React Component) -->
+    <section id="projects" class="py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title">Projects</h2>
+            <div id="projects-component"></div>
+        </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section id="leadership" class="py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title">Leadership & Professional Development</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Leadership 1 -->
+                <div class="glass-card p-6 md:p-8 h-full relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-32 h-32 -mt-10 -ml-10 bg-gradient-to-br from-accent-indigo/20 to-accent-purple/20 rounded-full blur-xl"></div>
+                    <div class="flex flex-col justify-between items-start mb-4 relative z-10">
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Colby College</h3>
+                            <p class="text-lg text-gray-300">Community Advisor</p>
+                        </div>
+                        <div class="mt-2">
+                            <span class="bg-gradient-to-r from-accent-indigo/30 to-accent-purple/30 text-white py-1 px-4 rounded-full text-sm font-medium border border-white/10">Aug 2022 - Sept 2024</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 relative z-10">
+                        Served as the vital bridge between students and housing administration, facilitating community-building activities, addressing housing concerns, and cultivating a positive and educational living environment.
+                    </p>
+                </div>
+
+                <!-- Leadership 2 -->
+                <div class="glass-card p-6 md:p-8 h-full relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 -mt-10 -mr-10 bg-gradient-to-br from-accent-indigo/20 to-accent-purple/20 rounded-full blur-xl"></div>
+                    <div class="flex flex-col justify-between items-start mb-4 relative z-10">
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Colby College</h3>
+                            <p class="text-lg text-gray-300">Teaching Assistant | Computational Thinking</p>
+                        </div>
+                        <div class="mt-2">
+                            <span class="bg-gradient-to-r from-accent-indigo/30 to-accent-purple/30 text-white py-1 px-4 rounded-full text-sm font-medium border border-white/10">Sept 2022 - Dec 2023</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 relative z-10">
+                        Assist students in mastering python programming concepts, resolving coding issues, and completing projects.
+                    </p>
+                </div>
+
+                <!-- Leadership 3 -->
+                <div class="glass-card p-6 md:p-8 h-full md:col-span-2 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-32 h-32 -mt-10 -ml-10 bg-gradient-to-br from-accent-indigo/20 to-accent-purple/20 rounded-full blur-xl"></div>
+                    <div class="flex flex-col justify-between items-start mb-4 relative z-10">
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">WJHS Coding Club</h3>
+                            <p class="text-lg text-gray-300">Mentor & Tutor</p>
+                        </div>
+                        <div class="mt-2">
+                            <span class="bg-gradient-to-r from-accent-indigo/30 to-accent-purple/30 text-white py-1 px-4 rounded-full text-sm font-medium border border-white/10">Sept 2021 - May 2025</span>
+                        </div>
+                    </div>
+                    <ul class="list-disc pl-5 text-gray-300 space-y-2 relative z-10">
+                        <li>Helped develop a Python Turtle and Finch Robot coding curriculum to 15 middle school students.</li>
+                        <li>Facilitated hands-on computer science projects, introducing core concepts to a young audience.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="flex flex-col md:flex-row md:space-x-10">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <form class="glass-card p-6 md:p-8 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-32 h-32 -mt-10 -ml-10 bg-gradient-to-br from-accent-indigo/20 to-accent-purple/20 rounded-full blur-xl"></div>
+                        <div class="relative z-10">
+                            <div class="mb-6">
+                                <label for="name" class="block text-white font-medium mb-2">Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 bg-gray-900/50 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-indigo/50" placeholder="Your Name">
+                            </div>
+                            <div class="mb-6">
+                                <label for="email" class="block text-white font-medium mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 bg-gray-900/50 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-indigo/50" placeholder="your@email.com">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-white font-medium mb-2">Message</label>
+                                <textarea id="message" rows="5" class="w-full px-4 py-2 bg-gray-900/50 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-indigo/50" placeholder="Your message here..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary w-full py-3 rounded-lg text-white font-medium">
+                                Send Message <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="glass-card p-6 md:p-8 h-full relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 -mt-10 -mr-10 bg-gradient-to-br from-accent-indigo/20 to-accent-purple/20 rounded-full blur-xl"></div>
+                        <h3 class="text-2xl font-semibold text-white mb-8 relative z-10">Contact Information</h3>
+                        <div class="space-y-8 relative z-10">
+                            <div class="flex items-start transform transition-transform hover:translate-x-2">
+                                <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-r from-accent-indigo to-accent-purple mr-4">
+                                    <i class="fas fa-envelope text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-white">Email</h4>
+                                    <a href="mailto:emmanuelassumang@gmail.com" class="text-gray-300 hover:text-white transition-colors">emmanuelassumang@gmail.com</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start transform transition-transform hover:translate-x-2">
+                                <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-r from-accent-indigo to-accent-purple mr-4">
+                                    <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-white">Location</h4>
+                                    <p class="text-gray-300">Waterville, ME, USA</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start transform transition-transform hover:translate-x-2">
+                                <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-r from-accent-indigo to-accent-purple mr-4">
+                                    <i class="fas fa-globe text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-white">Social Profiles</h4>
+                                    <div class="flex mt-3 space-x-4">
+                                        <a href="https://www.linkedin.com/in/emmanuelassumang" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-accent-indigo transition-colors text-white">
+                                            <i class="fab fa-linkedin"></i>
+                                        </a>
+                                        <a href="https://github.com/emmanuelassumang" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-accent-purple transition-colors text-white">
+                                            <i class="fab fa-github"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-10 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-accent-indigo/10 to-accent-purple/10"></div>
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-accent-indigo/20 rounded-full filter blur-3xl"></div>
+            <div class="absolute -top-24 -right-24 w-64 h-64 bg-accent-purple/20 rounded-full filter blur-3xl"></div>
+        </div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-2 bg-gradient-to-r from-accent-indigo to-accent-purple bg-clip-text text-transparent">Emmanuel Assumang</h3>
+                    <p class="text-gray-300">Software Engineer & CS Student</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="https://www.linkedin.com/in/emmanuelassumang" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-800 hover:bg-accent-indigo transition-all transform hover:scale-110 text-white">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="https://github.com/emmanuelassumang" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-800 hover:bg-accent-purple transition-all transform hover:scale-110 text-white">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="mailto:emmanuelassumang@gmail.com" class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-800 hover:bg-blue-600 transition-all transform hover:scale-110 text-white">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700/50 text-center text-gray-400">
+                <p>&copy; 2025 Emmanuel Assumang. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- React and ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Framer Motion -->
+    <script src="https://unpkg.com/framer-motion@10.12.16/dist/framer-motion.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    <!-- React Components -->
+    <script src="js/components.js"></script>
+    <!-- 3D Components and Tech -->
+    <script src="js/3dcomponents.js"></script>
+    <script src="js/3dtech.js"></script>
+    <!-- Framer Motion Animations -->
+    <script src="js/animations.js"></script>
+</body>
+</html>

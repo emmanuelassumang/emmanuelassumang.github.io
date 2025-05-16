@@ -1,0 +1,282 @@
+/* Enhanced 3D styles for a modern dark theme portfolio */
+
+/* Dark theme color variables */
+:root {
+    --bg-dark: #0f172a;
+    --bg-dark-lighter: #1e293b;
+    --text-light: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent-indigo: #6366f1;
+    --accent-purple: #8b5cf6;
+    --accent-blue: #3b82f6;
+    --glow-indigo: rgba(99, 102, 241, 0.4);
+    --glow-purple: rgba(139, 92, 246, 0.4);
+    --glow-blue: rgba(59, 130, 246, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-bg: rgba(30, 41, 59, 0.7);
+}
+
+/* Global theme overrides for dark mode */
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
+
+/* Enhanced 3D space for tech stack */
+.tech-space {
+    position: relative;
+    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-dark-lighter) 100%);
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+.tech-space::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15), transparent 60%);
+    pointer-events: none;
+}
+
+/* 3D floating tech icons */
+.tech-icon-3d {
+    pointer-events: auto;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
+    will-change: transform;
+}
+
+.tech-icon-3d:hover {
+    z-index: 1000 !important;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+}
+
+.tech-icon-inner {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transition: transform 0.3s ease;
+}
+
+.tech-icon-3d:hover .tech-icon-inner {
+    transform: rotateY(360deg);
+    transition: transform 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Featured tech cards */
+.featured-tech-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.featured-tech-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.featured-tech-card:hover::before {
+    opacity: 1;
+}
+
+.featured-tech-card:hover {
+    transform: translateZ(20px) scale(1.05);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3),
+                0 0 15px rgba(99, 102, 241, 0.3);
+}
+
+.tech-logo-container {
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.featured-tech-card:hover .tech-logo-container {
+    transform: translateZ(30px) rotateY(360deg);
+}
+
+/* Know more button */
+.know-more-btn {
+    position: relative;
+    overflow: hidden;
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.know-more-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.know-more-btn:hover::before {
+    left: 100%;
+}
+
+/* 3D project cards */
+.project-card-3d {
+    perspective: 2000px;
+    transform-style: preserve-3d;
+    margin-bottom: 6rem;
+}
+
+.project-card-inner {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.project-card-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.project-card-inner:hover {
+    transform: translateZ(30px) rotateX(3deg);
+    box-shadow:
+        0 30px 60px -15px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(99, 102, 241, 0.2);
+}
+
+/* View details button */
+.view-details-btn {
+    position: absolute;
+    z-index: 20;
+    opacity: 0;
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.project-card-inner:hover .view-details-btn {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateZ(50px);
+}
+
+.view-details-btn > div {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.view-details-btn > div::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(transparent, rgba(255, 255, 255, 0.3), transparent 30%);
+    animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Project image container */
+.project-image-container {
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+}
+
+.project-image-container img {
+    transition: transform 0.5s ease;
+}
+
+.project-card-inner:hover .project-image-container img {
+    transform: scale(1.05);
+}
+
+/* Project tags */
+.project-card-inner .tags span {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.project-card-inner:hover .tags span {
+    transform: translateZ(15px);
+}
+
+/* 3D moving background for hero section */
+.hero-3d-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 30%, var(--glow-purple), transparent 70%),
+        radial-gradient(circle at 80% 70%, var(--glow-indigo), transparent 70%);
+    opacity: 0.4;
+    filter: blur(60px);
+    animation: pulse-bg 8s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-bg {
+    0% {
+        opacity: 0.3;
+        filter: blur(60px);
+    }
+    100% {
+        opacity: 0.5;
+        filter: blur(80px);
+    }
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .project-card-inner:hover {
+        transform: translateZ(10px) rotateX(1deg);
+    }
+
+    .featured-tech-card:hover {
+        transform: translateZ(10px) scale(1.03);
+    }
+
+    .view-details-btn {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+
+    .project-card-inner:hover .view-details-btn {
+        transform: translate(-50%, -50%) translateZ(20px) scale(0.8);
+    }
+}
