@@ -261,16 +261,38 @@ function EnhancedProjectsComponent() {
         {
             title: 'Athlete Management System',
             description: 'Led a 5-person team to build and deploy a comprehensive Athlete Management System for Colby Athletics using Heroku. Created a one-stop portal for real-time athlete readiness tracking using Flask and fetched data from wearables using REST API.',
-            image: 'https://via.placeholder.com/800x600',
+            image: 'assets/images/projects/athletemanagement.jpg',
             tags: ['Flask', 'REST API', 'Machine Learning', 'Heroku'],
-            color: '#6366f1' // indigo
+            color: '#6366f1', // indigo
+            projectUrl: 'https://github.com/enjoythecode/scrum-wizards-cs321',
+            githubUrl: 'https://github.com/enjoythecode/scrum-wizards-cs321'
         },
         {
             title: 'Chaos Dungeon Game',
             description: 'Built a fully functional single-player interactive adventure pc game using Pygame. Pioneered essential character class foundations and crafted an intuitive UI for a seamless gaming experience.',
-            image: 'https://via.placeholder.com/800x600',
+            image: 'assets/images/projects/chaosdungeon.jpg',
             tags: ['Python', 'Pygame', 'Game Development', 'UI Design'],
-            color: '#8b5cf6' // violet
+            color: '#8b5cf6', // violet
+            projectUrl: 'https://github.com/tylionshield/ChaosDungeon',
+            githubUrl: 'https://github.com/tylionshield/ChaosDungeon'
+        },
+        {
+            title: 'Figrex',
+            description: 'A figure recognition and analysis tool designed to interpret and process visual data efficiently.',
+            image: 'assets/images/projects/figrex.jpg',
+            tags: ['Computer Vision', 'AI/ML', 'Data Processing', 'Python'],
+            color: '#3b82f6', // blue
+            projectUrl: 'https://figrex.com',
+            githubUrl: 'https://github.com/Syd4r/figrex'
+        },
+        {
+            title: 'PantryAI',
+            description: 'An AI-powered recipe generator that creates personalized recipes based on available ingredients.',
+            image: 'assets/images/projects/pantryai.jpg',
+            tags: ['AI/ML', 'Web Development', 'React', 'Python'],
+            color: '#ec4899', // pink
+            projectUrl: 'https://pantryai-52d0ec20532a.herokuapp.com',
+            githubUrl: 'https://github.com/emmanuelassumang/RecipeGen'
         }
     ];
 
@@ -439,7 +461,8 @@ function EnhancedProjectsComponent() {
                                     React.createElement(
                                         motion.a,
                                         {
-                                            href: '#',
+                                            href: project.projectUrl,
+                                            target: '_blank',
                                             className: 'mt-auto inline-flex items-center text-sm font-medium',
                                             style: { color: project.color },
                                             whileHover: { x: 5 }
